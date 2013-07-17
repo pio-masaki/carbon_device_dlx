@@ -26,13 +26,16 @@ DEVICE_PACKAGE_OVERLAYS += device/htc/dlx/overlay
 PRODUCT_COPY_FILES += device/common/gps/gps.conf_US_SUPL:system/etc/gps.conf
 
 # Ramdisk
-PRODUCT_COPY_FILES += \
-    device/htc/dlx/ramdisk/fstab.dlx:root/fstab.dlx \
-    device/htc/dlx/ramdisk/init.dlx.rc:root/init.dlx.rc \
-    device/htc/dlx/ramdisk/ueventd.dlx.rc:root/ueventd.dlx.rc \
-    device/htc/dlx/ramdisk/init.dlx.usb.rc:root/init.dlx.usb.rc \
-    device/htc/dlx/ramdisk/init.qcom.sh:root/init.qcom.sh \
-    device/htc/dlx/ramdisk/init.qcom.firmware_links.sh:root/init.qcom.firmware_links.sh
+PRODUCT_PACKAGES += \
+    fstab.dlx \
+    init.qcom.firmware_links.sh \
+    init.qcom.sh \
+    init.dlx.rc \
+    init.dlx.usb.rc \
+    ueventd.dlx.rc
+
+PRODUCT_PACKAGES += \
+    libnetcmdiface 
 
 # Custom Recovery and Charging
 PRODUCT_COPY_FILES += \
@@ -52,10 +55,13 @@ endif
 PRODUCT_COPY_FILES += \
     $(NFCEE_ACCESS_PATH):system/etc/nfcee_access.xml \
     frameworks/base/nfc-extras/com.android.nfc_extras.xml:system/etc/permissions/com.android.nfc_extras.xml \
-    frameworks/native/data/etc/android.hardware.nfc.xml:system/etc/permissions/android.hardware.nfc.xml
+    frameworks/native/data/etc/android.hardware.nfc.xml:system/etc/permissions/android.hardware.nfc.xml \
+    frameworks/native/data/etc/android.hardware.wifi.direct.xml:system/etc/permissions/android.hardware.wifi.direct.xml
 
 # Media configs
 PRODUCT_COPY_FILES += device/htc/dlx/configs/AudioBTID.csv:system/etc/AudioBTID.csv
+PRODUCT_COPY_FILES += device/htc/dlx/configs/AudioBTIDnew.csv:system/etc/AudioBTIDnew.csv
+PRODUCT_COPY_FILES += device/htc/dlx/configs/audio_effects.conf:system/etc/audio_effects.conf 
 
 # vold config
 PRODUCT_COPY_FILES += \
@@ -121,9 +127,6 @@ PRODUCT_PACKAGES += \
         libloc_api_v02 \
         libgps.utils \
         gps.msm8960
-
-PRODUCT_COPY_FILES += \
-    device/htc/dlx/prebuilt/lib/libloc_api_v02.so:system/lib/libloc_api_v02.so
 
 # NFC
 PRODUCT_PACKAGES += \

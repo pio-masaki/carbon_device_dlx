@@ -53,6 +53,9 @@
     <!-- Boolean indicating whether the wifi chipset has dual frequency band support -->
     <bool translatable="false" name="config_wifi_dual_band_support">true</bool>
 
+    <!-- Boolean indicating whether the wifi chipset has p2p support -->
+    <bool translatable="false" name="config_wifi_p2p_support">true</bool>
+
     <!-- Boolean indicating whether the wifi chipset has background scan support -->
     <bool translatable="false" name="config_wifi_background_scan_support">true</bool>
 
@@ -206,15 +209,13 @@
          config to 7. -->
     <integer name="config_deviceHardwareKeys">19</integer>
 
-    <string-array name="config_usbHostBlacklist">
-        <!-- /dev/bus/usb/001 is used for the modem -->
-        <item>/dev/bus/usb/001</item>
-    </string-array>
-
     <!-- reference volume index for music stream to limit headphone volume and display warning -->
     <integer name="config_safe_media_volume_index">7</integer>
 
     <!-- Flag indicating if the speed up audio on mt call code should be executed -->
     <bool name="config_speed_up_audio_on_mt_calls">true</bool>
+
+    <!-- Enable Wifi Display / Miracast Support. -->
+    <bool name="config_enableWifiDisplay">true</bool>
 
 </resources>
