@@ -27,7 +27,7 @@
 # inherit from common msm8960
 -include device/htc/msm8960-common/BoardConfigCommon.mk
 
-TARGET_SPECIFIC_HEADER_PATH := device/htc/dlx-g/include
+TARGET_SPECIFIC_HEADER_PATH := device/htc/dlxg/include
 
 # Flags
 TARGET_GLOBAL_CFLAGS += -mfpu=neon-vfpv4 -mfloat-abi=softfp
@@ -74,8 +74,8 @@ COMMON_GLOBAL_CFLAGS += -DHTC_CAMERA_HARDWARE
 # Bluetooth
 BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_BCM := true
-BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/htc/dlx-g/bluetooth/include
-BOARD_BLUEDROID_VENDOR_CONF := device/htc/dlx-g/bluetooth/vnd_dlx.txt
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/htc/dlxg/bluetooth/include
+BOARD_BLUEDROID_VENDOR_CONF := device/htc/dlxg/bluetooth/vnd_dlx.txt
 BOARD_BLUETOOTH_USES_HCIATTACH_PROPERTY := false
 
 # Use libril in the device tree

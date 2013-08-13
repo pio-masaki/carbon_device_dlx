@@ -1,1 +1,1 @@
-add_lunch_combo carbon_dlx-g-userdebug
+add_lunch_combo carbon_dlxg-userdebug

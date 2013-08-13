@@ -1,5 +1,5 @@
 #
-# system.prop for dlx
+# system.prop for dlxg
 #
 mobiledata.interfaces=rmnet0,rmnet1
 rild.libargs=-d /dev/smd0

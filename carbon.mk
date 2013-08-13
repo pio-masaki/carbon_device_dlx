@@ -15,11 +15,11 @@ $(call inherit-product, vendor/carbon/config/common_phone.mk)
 #$(call inherit-product, vendor/cm/config/nfc_enhanced.mk)
 
 # Inherit device configuration
-$(call inherit-product, device/htc/dlx-g/full_dlx.mk)
+$(call inherit-product, device/htc/dlxg/full_dlxg.mk)
 
 ## Device identifier. This must come after all inclusions
 PRODUCT_DEVICE := dlx
-PRODUCT_NAME := carbon_dlx-g
+PRODUCT_NAME := carbon_dlxg
 PRODUCT_BRAND := Verizon
 PRODUCT_MODEL := HTC6435LVW
 PRODUCT_MANUFACTURER := HTC
