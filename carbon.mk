@@ -1,5 +1,5 @@
 ## Specify phone tech before including full_phone
-$(call inherit-product, vendor/carbon/config/common_gsm.mk)
+$(call inherit-product, vendor/carbon/config/common_cdma.mk)
 
 # Boot animation
 TARGET_SCREEN_HEIGHT := 1920
