@@ -108,6 +108,9 @@ on boot
     write /sys/devices/i2c-3/3-0024/cyttsp_update_fw 1
     start qcamerasvr
 
+    # 4.3 requires this
+    chmod 0644 /proc/cmdline
+
     # bluetooth
     chown bluetooth bluetooth /sys/devices/platform/msm_serial_hs.0/clock
     chown bluetooth bluetooth /sys/class/rfkill/rfkill0/type
@@ -197,6 +200,10 @@ on boot
     chown system audio /dev/tfa9887
     chmod 0664 /dev/tfa9887
 
+    # For Flashlight Restriction
+    chown system system /sys/camera_led_status/led_hotspot_status
+    chown radio system /sys/camera_led_status/led_ril_status
+
     # For camera to switch burst mode
     chown media media /sys/devices/platform/msm_sdcc.1/burst
     chown media media /proc/emmc_burst
@@ -206,7 +213,7 @@ on boot
     chown media system /sys/camera_attrs/videochat
 
     # flashlight
-    chown system camera /sys/class/leds/flashlight/brightness
+    chown system system /sys/class/leds/flashlight/brightness
     chmod 0666          /sys/class/leds/flashlight/brightness
 
     # HTC SSD USB
@@ -221,23 +228,6 @@ on boot
     chown radio radio /sys/class/power_supply/battery/phone_call
     chown radio radio /sys/class/power_supply/battery/network_search
     chown system system /sys/class/power_supply/battery/navigation
-
-# Define TCP buffer sizes for various networks
-    setprop net.tcp.buffersize.default 4096,87380,110208,4096,16384,110208
-    setprop net.tcp.buffersize.wifi    524288,1048576,2097152,262144,524288,1048576
-    setprop net.tcp.buffersize.lte     4094,87380,1220608,4096,16384,1220608
-    setprop net.tcp.buffersize.umts    4094,87380,110208,4096,16384,110208
-    setprop net.tcp.buffersize.hspa    4094,87380,1220608,4096,16384,1220608
-    setprop net.tcp.buffersize.hsupa   4094,87380,1220608,4096,16384,1220608
-    setprop net.tcp.buffersize.hsdpa   4094,87380,1220608,4096,16384,1220608
-    setprop net.tcp.buffersize.edge    4093,26280,35040,4096,16384,35040
-    setprop net.tcp.buffersize.gprs    4092,8760,11680,4096,8760,11680
-    setprop net.tcp.buffersize.evdo_b  4094,87380,262144,4096,16384,262144
-
-# Assign TCP buffer thresholds to be ceiling value of technology maximums
-# Increased technology maximums should be reflected here.
-    write /proc/sys/net/core/rmem_max  1220608
-    write /proc/sys/net/core/wmem_max  1220608
 
 on post-fs-data
     mkdir /data/media 0770 media_rw media_rw
@@ -340,6 +330,10 @@ service dhcpcd_p2p /system/bin/dhcpcd -aABKL
 	disabled
 	oneshot
 
+service dhcpcd_bt-pan /system/bin/dhcpcd -ABKL
+	disabled
+	oneshot
+
 service iprenew_wlan0 /system/bin/dhcpcd -n
 	disabled
 	oneshot
@@ -351,8 +345,6 @@ service iprenew_p2p /system/bin/dhcpcd -n
 
 on property:init.svc.bootanim=stopped
     	start post-boot
-    	# Overwrite ActivityManager's low memory killer settings
-    	write /sys/module/lowmemorykiller/parameters/adj 0,2,4,7,9,12
 
 service post-boot /system/bin/sh /system/etc/init.post_boot.sh
     user root
@@ -371,16 +363,6 @@ service netmgrd /system/bin/netmgrd
     class core
 
 #--SSD_RIL
-
-#HDMI
-
-service hdmid /system/bin/hdmid
-    class late_start
-    socket displayd stream 0660 root system graphics
-    disabled
-
-on property:ro.hdmi.enable=true
-    start hdmid
 
 service tpd /sbin/tpd
     class core
@@ -452,3 +434,7 @@ on property:ro.baseband="msm"
     # Enable BT-DUN only for all msms
     setprop ro.qualcomm.bluetooth.dun true    
 
+on property:service.adb.root=1
+    write /sys/class/android_usb/android0/enable 0
+    restart adbd
+    write /sys/class/android_usb/android0/enable 1
