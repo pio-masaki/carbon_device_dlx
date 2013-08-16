@@ -18,7 +18,7 @@ $(call inherit-product, vendor/carbon/config/common_phone.mk)
 $(call inherit-product, device/htc/dlxg/full_dlxg.mk)
 
 ## Device identifier. This must come after all inclusions
-PRODUCT_DEVICE := dlx
+PRODUCT_DEVICE := dlxg
 PRODUCT_NAME := carbon_dlxg
 PRODUCT_BRAND := Verizon
 PRODUCT_MODEL := HTC6435LVW
