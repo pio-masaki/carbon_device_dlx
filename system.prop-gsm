@@ -1,0 +1,24 @@
+#
+# system.prop for dlxg
+#
+mobiledata.interfaces=rmnet0,rmnet1
+rild.libargs=-d /dev/smd0
+rild.libpath=/system/lib/libril-qc-qmi-1.so
+ro.vendor.extension_library=/system/lib/libqc-opt.so
+ro.telephony.default_network=9
+telephony.lteOnGsmDevice=1
+ro.baseband.arch = mdm
+
+# system props for display
+ro.sf.lcd_density=480
+debug.mdpcomp.maxlayer=3
+
+ro.hdmi.enable=true
+
+#
+#Simulate sdcard on /data/media
+#
+persist.fuse_sdcard=true
+
+# Support HW reset
+ro.product.hwreset = 1

@@ -40,5 +40,3 @@ persist.fuse_sdcard=true
 
 # Support HW reset
 ro.product.hwreset = 1
-
-

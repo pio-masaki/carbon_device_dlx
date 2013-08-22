@@ -1,5 +1,7 @@
 ## Specify phone tech before including full_phone
 $(call inherit-product, vendor/carbon/config/common_cdma.mk)
+# For GSM users - block cdma above, for cdma, block below
+#$(call inherit-product, vendor/carbon/config/common_gsm.mk)
 
 # Boot animation
 TARGET_SCREEN_HEIGHT := 1920
